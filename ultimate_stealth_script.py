@@ -4,45 +4,7 @@ import random
 import tempfile
 import shutil
 import time
-import numpy as np
-import json
-import os
-from datetime import datetime, timedelta
-import math
 
-# === نظام تعلم آلي للسلوك البشري ===
-class HumanBehaviorML:
-    def __init__(self):
-        self.mouse_patterns = self.generate_mouse_patterns()
-        self.typing_patterns = self.generate_typing_patterns()
-        self.scroll_patterns = self.generate_scroll_patterns()
-    
-    def generate_mouse_patterns(self):
-        # محاكاة أنماط حركة الفأرة البشرية
-        patterns = {
-            "natural_curve": lambda x: x + 0.1 * math.sin(x * 0.1),
-            "acceleration": lambda x: x * (1 + 0.05 * math.sin(x * 0.05)),
-            "micro_corrections": lambda x: x + random.uniform(-2, 2)
-        }
-        return patterns
-    
-    def generate_typing_patterns(self):
-        # محاكاة أنماط الكتابة البشرية
-        return {
-            "average_speed": random.uniform(150, 300),  # ms between keystrokes
-            "speed_variation": random.uniform(0.1, 0.3),
-            "error_rate": random.uniform(0.01, 0.05)
-        }
-    
-    def generate_scroll_patterns(self):
-        # محاكاة أنماط التمرير البشرية
-        return {
-            "smooth_scroll": True,
-            "scroll_speed": random.uniform(50, 150),
-            "pause_probability": random.uniform(0.1, 0.3)
-        }
-
-# === شخصيات متصفح محسنة ===
 personas = {
     "win11_gaming_elite": {
         "platform": "Win32", "ua_os": "Windows NT 10.0; Win64; x64",
@@ -80,12 +42,10 @@ personas = {
     }
 }
 
-# === اختيار شخصية محسنة ===
-os_weights = [40, 35, 25]  # توزيع احتمالي محسن
+os_weights = [40, 35, 25]
 os_type = random.choices(list(personas.keys()), weights=os_weights)[0]
 persona = personas[os_type]
 
-# === إعدادات متقدمة ===
 width, height = random.choice(persona["resolutions"])
 gpu_vendor, gpu_renderer = random.choice(persona["gpus"])
 cores = random.choice(persona["cores"])
@@ -94,12 +54,10 @@ gpu_memory = random.choice(persona["gpu_memory"])
 cpu_cache = random.choice(persona["cpu_cache"])
 ram_speed = random.choice(persona["ram_speed"])
 
-# === Chrome versions محدثة ===
 chrome_versions = ["129.0.6668.58", "129.0.6668.59", "129.0.6668.60", "130.0.6712.0", "130.0.6712.1"]
 chrome_ver = random.choice(chrome_versions)
 ua = f"Mozilla/5.0 ({persona['ua_os']}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{chrome_ver} Safari/537.36"
 
-# === إعدادات متقدمة للشبكة ===
 network_profiles = {
     "home_wifi": {
         "latency": (10, 50), "jitter": (2, 10), "packet_loss": (0.001, 0.01),
@@ -118,19 +76,16 @@ network_profiles = {
 network_type = random.choice(list(network_profiles.keys()))
 network_config = network_profiles[network_type]
 
-# === إعدادات متقدمة للتمويه ===
 connection_rtt = random.randint(network_config["latency"][0], network_config["latency"][1])
 connection_downlink = round(random.uniform(network_config["downlink"][0], network_config["downlink"][1]), 1)
 connection_uplink = round(random.uniform(network_config["uplink"][0], network_config["uplink"][1]), 1)
 connection_type = random.choice(['4g', '4g', '4g', '5g', 'wifi', 'wifi'])
 
-# === إعدادات Battery متقدمة ===
 battery_level = round(random.uniform(0.15, 0.95), 2)
 battery_charging = random.choice([True, False, False])
 battery_charging_time = random.randint(3600, 7200) if battery_charging else 0
 battery_discharging_time = random.randint(7200, 28800) if not battery_charging else float('inf')
 
-# === إعدادات Geolocation متقدمة ===
 geolocation_profiles = {
     "new_york": {"lat": 40.7128, "lng": -74.0060, "accuracy": (10, 50)},
     "london": {"lat": 51.5074, "lng": -0.1278, "accuracy": (10, 50)},
@@ -141,7 +96,6 @@ geolocation_profiles = {
 location_profile = random.choice(list(geolocation_profiles.keys()))
 location_config = geolocation_profiles[location_profile]
 
-# === إعدادات متقدمة للغات والمناطق الزمنية ===
 language_profiles = {
     "en_US": {"lang": "en-US,en;q=0.9", "timezone": "America/New_York"},
     "en_GB": {"lang": "en-GB,en;q=0.9", "timezone": "Europe/London"},
@@ -153,7 +107,6 @@ lang_profile = random.choice(list(language_profiles.keys()))
 language = language_profiles[lang_profile]["lang"]
 timezone = language_profiles[lang_profile]["timezone"]
 
-# === إعداد Chrome محسن ===
 profile_dir = tempfile.mkdtemp(prefix="ultimate_stealth_")
 options = Options()
 options.add_argument(f"--user-data-dir={profile_dir}")
@@ -161,7 +114,6 @@ options.add_argument(f"--user-agent={ua}")
 options.add_argument(f"--window-size={width},{height}")
 options.add_argument(f"--lang={language.split(',')[0]}")
 
-# === Arguments محسنة للتمويه الفائق ===
 ultimate_stealth_args = [
     "--disable-blink-features=AutomationControlled",
     "--disable-infobars", "--disable-extensions", "--no-first-run", "--disable-dev-shm-usage",
@@ -186,7 +138,6 @@ ultimate_stealth_args = [
 for arg in ultimate_stealth_args:
     options.add_argument(arg)
 
-# === إعدادات متقدمة للـ Preferences ===
 advanced_prefs = {
     "credentials_enable_service": False, "profile.password_manager_enabled": False,
     "profile.default_content_setting_values.notifications": 2,
@@ -214,10 +165,8 @@ options.add_experimental_option("excludeSwitches", ["enable-automation", "enable
 options.add_experimental_option('useAutomationExtension', False)
 options.add_experimental_option("prefs", advanced_prefs)
 
-# === إنشاء المتصفح الفائق ===
 driver = uc.Chrome(options=options, use_subprocess=True)
 
-# === CDP إعدادات محسنة ===
 driver.execute_cdp_cmd('Emulation.setTimezoneOverride', {'timezoneId': timezone})
 driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {
     'Accept-Language': language,
@@ -232,7 +181,6 @@ driver.execute_cdp_cmd('Network.setUserAgentOverride', {
     'userAgent': ua, 'acceptLanguage': language, 'platform': persona['platform']
 })
 
-# === محاكاة شبكة محسنة ===
 driver.execute_cdp_cmd('Network.emulateNetworkConditions', {
     'offline': False, 'latency': connection_rtt, 
     'downloadThroughput': int(connection_downlink * 1000000),
@@ -240,9 +188,7 @@ driver.execute_cdp_cmd('Network.emulateNetworkConditions', {
     'packetLoss': random.uniform(network_config["packet_loss"][0], network_config["packet_loss"][1])
 })
 
-# === السكريبت الفائق الأقوى على الإطلاق ===
 ultimate_stealth_script = f"""
-// === WebGL التمويه الأقوى ===
 const getParam = WebGLRenderingContext.prototype.getParameter;
 const getExt = WebGLRenderingContext.prototype.getExtension;
 const getSuppExt = WebGLRenderingContext.prototype.getSupportedExtensions;
@@ -272,7 +218,6 @@ WebGLRenderingContext.prototype.getSupportedExtensions = function() {{
             'WEBGL_compressed_texture_s3tc', 'EXT_color_buffer_half_float'];
 }};
 
-// === Canvas التمويه المتطور ===
 const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
 const origGetImageData = CanvasRenderingContext2D.prototype.getImageData;
 
@@ -303,7 +248,6 @@ CanvasRenderingContext2D.prototype.getImageData = function() {{
     return addAdvancedNoise(origGetImageData.apply(this, arguments));
 }};
 
-// === Navigator التمويه الشامل ===
 const descriptors = {{
     webdriver: {{get: () => undefined}}, platform: {{get: () => '{persona["platform"]}'}},
     hardwareConcurrency: {{get: () => {cores}}}, deviceMemory: {{get: () => {memory}}},
@@ -315,7 +259,6 @@ const descriptors = {{
 }};
 Object.keys(descriptors).forEach(key => Object.defineProperty(navigator, key, descriptors[key]));
 
-// === WebRTC التمويه الأقوى ===
 if (navigator.mediaDevices) {{
     const origGetUserMedia = navigator.mediaDevices.getUserMedia;
     navigator.mediaDevices.getUserMedia = function(constraints) {{
@@ -328,7 +271,6 @@ if (navigator.mediaDevices) {{
     }};
 }}
 
-// === Geolocation التمويه المتقدم ===
 if (navigator.geolocation) {{
     const origGetCurrentPosition = navigator.geolocation.getCurrentPosition;
     navigator.geolocation.getCurrentPosition = function(success, error, options) {{
@@ -345,7 +287,6 @@ if (navigator.geolocation) {{
     }};
 }}
 
-// === Audio Context التمويه القوي ===
 ['AudioContext', 'webkitAudioContext'].forEach(name => {{
     if (window[name]) {{
         const origCreateAnalyser = window[name].prototype.createAnalyser;
@@ -376,7 +317,6 @@ if (navigator.geolocation) {{
     }}
 }});
 
-// === إزالة متغيرات الأتمتة الشاملة ===
 const automationVars = ['cdc_adoQpoasnfa76pfcZLmcfl_Array', 'cdc_adoQpoasnfa76pfcZLmcfl_Promise', 
                        'cdc_adoQpoasnfa76pfcZLmcfl_Symbol', 'cdc_adoQpoasnfa76pfcZLmcfl_JSON',
                        'cdc_adoQpoasnfa76pfcZLmcfl_Object', 'cdc_adoQpoasnfa76pfcZLmcfl_Proxy'];
@@ -386,7 +326,6 @@ Object.keys(window).forEach(key => {{
     if (key.includes('cdc_') || key.includes('automation') || key.includes('webdriver')) delete window[key];
 }});
 
-// === Screen التمويه الدقيق ===
 const screenProps = {{
     width: {{get: () => {width}}}, height: {{get: () => {height}}},
     availWidth: {{get: () => {width}}}, availHeight: {{get: () => {height - random.randint(40, 80)}}},
@@ -397,7 +336,6 @@ const screenProps = {{
 }};
 Object.keys(screenProps).forEach(key => Object.defineProperty(screen, key, screenProps[key]));
 
-// === Font Fingerprinting التمويه المتقدم ===
 const fontMetrics = {{
     'Arial': {{ width: 8.5, height: 12 }},
     'Times New Roman': {{ width: 8.2, height: 11.8 }},
@@ -426,7 +364,6 @@ Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {{
     }}
 }});
 
-// === Performance API التمويه المتقدم ===
 if (window.performance?.now) {{
     const origNow = window.performance.now;
     const timeOffset = Math.random() * 2000;
@@ -444,7 +381,6 @@ if (window.performance?.getEntries) {{
     }};
 }}
 
-// === Battery API التمويه المتقدم ===
 if (navigator.getBattery) {{
     const origGetBattery = navigator.getBattery;
     navigator.getBattery = function() {{
@@ -460,7 +396,6 @@ if (navigator.getBattery) {{
     }};
 }}
 
-// === Connection API التمويه المتقدم ===
 if (navigator.connection) {{
     Object.defineProperties(navigator.connection, {{
         rtt: {{get: () => {connection_rtt}}}, 
@@ -471,7 +406,6 @@ if (navigator.connection) {{
     }});
 }}
 
-// === Date وTimezone التمويه المتقدم ===
 const origGetTimezoneOffset = Date.prototype.getTimezoneOffset;
 Date.prototype.getTimezoneOffset = function() {{ 
     const timezoneOffsets = {{
@@ -489,17 +423,14 @@ if (window.Intl?.DateTimeFormat) {{
     }};
 }}
 
-// === إخفاء iframe وWindow properties ===
 Object.defineProperties(window, {{
     top: {{get: () => window}}, parent: {{get: () => window}}, frameElement: {{get: () => null}}
 }});
 
-// === Chrome Runtime إخفاء ===
 if (window.chrome?.runtime) {{
     ['onConnect', 'onMessage', 'sendMessage'].forEach(prop => delete window.chrome.runtime[prop]);
 }}
 
-// === Mouse Events محاكاة متقدمة ===
 let mouseX = Math.random() * {width}, mouseY = Math.random() * {height};
 let lastMouseTime = Date.now();
 
@@ -507,7 +438,6 @@ setInterval(() => {{
     const now = Date.now();
     const timeDiff = now - lastMouseTime;
     
-    // محاكاة حركة بشرية أكثر واقعية
     const speed = Math.random() * 10 + 5;
     const angle = Math.random() * Math.PI * 2;
     
@@ -524,7 +454,6 @@ setInterval(() => {{
     lastMouseTime = now;
 }}, Math.random() * 3000 + 1000);
 
-// === Permissions API تمويه متقدم ===
 if (navigator.permissions?.query) {{
     const origQuery = navigator.permissions.query;
     navigator.permissions.query = function(obj) {{
@@ -538,76 +467,55 @@ if (navigator.permissions?.query) {{
     }};
 }}
 
-// === Hardware Concurrency تمويه متقدم ===
 Object.defineProperty(navigator, 'hardwareConcurrency', {{
     get: () => {cores}
 }});
 
-// === Device Memory تمويه متقدم ===
 Object.defineProperty(navigator, 'deviceMemory', {{
     get: () => {memory}
 }});
 
-// === Max Touch Points تمويه ===
 Object.defineProperty(navigator, 'maxTouchPoints', {{
     get: () => 0
 }});
 
-// === إزالة WebDriver ===
 delete navigator.__proto__.webdriver;
 
-// === إخفاء Automation ===
 Object.defineProperty(navigator, 'webdriver', {{
     get: () => undefined
 }});
 
-// === إخفاء Chrome ===
 if (window.chrome) {{
     Object.defineProperty(window.chrome, 'runtime', {{
         get: () => undefined
     }});
 }}
 
-// === إخفاء Selenium ===
 Object.defineProperty(window, 'selenium', {{
     get: () => undefined
 }});
 
-// === إخفاء WebDriver ===
 Object.defineProperty(window, 'webdriver', {{
     get: () => undefined
 }});
 
-// === إخفاء $cdc ===
 Object.keys(window).forEach(key => {{
     if (key.includes('$cdc') || key.includes('$chrome')) {{
         delete window[key];
     }}
 }});
-
-console.log('🚀 Ultimate Stealth Script Loaded Successfully!');
 """
 
-# === حقن السكريبت الفائق ===
 driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {'source': ultimate_stealth_script})
 
-# === نظام محاكاة السلوك البشري المتقدم ===
-human_behavior = HumanBehaviorML()
-
-# === التنقل مع سلوك بشري متقدم ===
 driver.get("https://bot.sannysoft.com/")
 time.sleep(random.uniform(4, 8))
 
-# === محاكاة سلوك بشري متقدم ===
-print("🤖 محاكاة السلوك البشري المتقدم...")
-
-# التمرير البطيء والطبيعي
 for i in range(random.randint(3, 6)):
     scroll_amount = random.randint(150, 400)
     driver.execute_script(f"window.scrollBy(0, {scroll_amount});")
     time.sleep(random.uniform(1.5, 3.5))
 
-# محاكاة النقر العشوائي
 driver.execute_script("""
     setTimeout(() => {
         const elements = document.querySelectorAll('div, span, p, button, a');
@@ -618,7 +526,6 @@ driver.execute_script("""
     }, """ + str(random.randint(2000, 5000)) + """);
 """)
 
-# محاكاة الكتابة
 driver.execute_script("""
     setTimeout(() => {
         const inputs = document.querySelectorAll('input[type="text"], textarea');
@@ -630,16 +537,6 @@ driver.execute_script("""
         }
     }, """ + str(random.randint(3000, 6000)) + """);
 """)
-
-print("✅ متصفح فائق القوة جاهز! القوة: 10/10")
-print(f"🎯 الشخصية المختارة: {os_type}")
-print(f"🖥️ الدقة: {width}x{height}")
-print(f"🚀 GPU: {gpu_renderer}")
-print(f"💾 الذاكرة: {memory}GB")
-print(f"⚡ الشبكة: {network_type}")
-print(f"📍 الموقع: {location_profile}")
-
-input("اضغط Enter للإغلاق...")
 
 driver.quit()
 shutil.rmtree(profile_dir)
