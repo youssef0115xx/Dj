@@ -5,6 +5,7 @@ import tempfile
 import shutil
 import time
 
+# === شخصيات متصفح فائقة القوة ===
 personas = {
     "win11_gaming_elite": {
         "platform": "Win32", "ua_os": "Windows NT 10.0; Win64; x64",
@@ -42,10 +43,12 @@ personas = {
     }
 }
 
+# === اختيار شخصية عشوائية ===
 os_weights = [40, 35, 25]
 os_type = random.choices(list(personas.keys()), weights=os_weights)[0]
 persona = personas[os_type]
 
+# === إعدادات الأجهزة ===
 width, height = random.choice(persona["resolutions"])
 gpu_vendor, gpu_renderer = random.choice(persona["gpus"])
 cores = random.choice(persona["cores"])
@@ -54,10 +57,12 @@ gpu_memory = random.choice(persona["gpu_memory"])
 cpu_cache = random.choice(persona["cpu_cache"])
 ram_speed = random.choice(persona["ram_speed"])
 
+# === إعدادات Chrome ===
 chrome_versions = ["129.0.6668.58", "129.0.6668.59", "129.0.6668.60", "130.0.6712.0", "130.0.6712.1"]
 chrome_ver = random.choice(chrome_versions)
 ua = f"Mozilla/5.0 ({persona['ua_os']}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/{chrome_ver} Safari/537.36"
 
+# === إعدادات الشبكة المتقدمة ===
 network_profiles = {
     "home_wifi": {
         "latency": (10, 50), "jitter": (2, 10), "packet_loss": (0.001, 0.01),
@@ -76,16 +81,19 @@ network_profiles = {
 network_type = random.choice(list(network_profiles.keys()))
 network_config = network_profiles[network_type]
 
+# === إعدادات الاتصال ===
 connection_rtt = random.randint(network_config["latency"][0], network_config["latency"][1])
 connection_downlink = round(random.uniform(network_config["downlink"][0], network_config["downlink"][1]), 1)
 connection_uplink = round(random.uniform(network_config["uplink"][0], network_config["uplink"][1]), 1)
 connection_type = random.choice(['4g', '4g', '4g', '5g', 'wifi', 'wifi'])
 
+# === إعدادات البطارية ===
 battery_level = round(random.uniform(0.15, 0.95), 2)
 battery_charging = random.choice([True, False, False])
 battery_charging_time = random.randint(3600, 7200) if battery_charging else 0
 battery_discharging_time = random.randint(7200, 28800) if not battery_charging else float('inf')
 
+# === إعدادات الموقع الجغرافي ===
 geolocation_profiles = {
     "new_york": {"lat": 40.7128, "lng": -74.0060, "accuracy": (10, 50)},
     "london": {"lat": 51.5074, "lng": -0.1278, "accuracy": (10, 50)},
@@ -96,6 +104,7 @@ geolocation_profiles = {
 location_profile = random.choice(list(geolocation_profiles.keys()))
 location_config = geolocation_profiles[location_profile]
 
+# === إعدادات اللغة والمنطقة الزمنية ===
 language_profiles = {
     "en_US": {"lang": "en-US,en;q=0.9", "timezone": "America/New_York"},
     "en_GB": {"lang": "en-GB,en;q=0.9", "timezone": "Europe/London"},
@@ -107,6 +116,7 @@ lang_profile = random.choice(list(language_profiles.keys()))
 language = language_profiles[lang_profile]["lang"]
 timezone = language_profiles[lang_profile]["timezone"]
 
+# === إعداد Chrome ===
 profile_dir = tempfile.mkdtemp(prefix="ultimate_stealth_")
 options = Options()
 options.add_argument(f"--user-data-dir={profile_dir}")
@@ -114,6 +124,7 @@ options.add_argument(f"--user-agent={ua}")
 options.add_argument(f"--window-size={width},{height}")
 options.add_argument(f"--lang={language.split(',')[0]}")
 
+# === أقوى arguments للتمويه ===
 ultimate_stealth_args = [
     "--disable-blink-features=AutomationControlled",
     "--disable-infobars", "--disable-extensions", "--no-first-run", "--disable-dev-shm-usage",
@@ -132,12 +143,20 @@ ultimate_stealth_args = [
     "--disable-sync-preferences", "--disable-translate",
     "--disable-web-resources", "--disable-plugins-discovery",
     "--disable-preconnect", "--disable-prefetch",
-    "--disable-background-downloads", "--disable-background-upload"
+    "--disable-background-downloads", "--disable-background-upload",
+    "--disable-features=VizDisplayCompositor", "--disable-features=TranslateUI",
+    "--disable-features=BlinkGenPropertyTrees", "--disable-features=NetworkService",
+    "--disable-features=NetworkServiceLogging", "--disable-features=AudioServiceOutOfProcess",
+    "--disable-features=MediaRouter", "--disable-features=MediaRouterMojo",
+    "--disable-features=MediaSession", "--disable-features=MediaSessionService",
+    "--disable-features=WebUIDarkMode", "--disable-features=WebUIDarkModeV2",
+    "--disable-features=WebUIDarkModeV3", "--disable-features=WebUIDarkModeV4"
 ]
 
 for arg in ultimate_stealth_args:
     options.add_argument(arg)
 
+# === أقوى إعدادات Preferences ===
 advanced_prefs = {
     "credentials_enable_service": False, "profile.password_manager_enabled": False,
     "profile.default_content_setting_values.notifications": 2,
@@ -158,6 +177,29 @@ advanced_prefs = {
     "profile.default_content_setting_values.automatic_downloads": 1,
     "profile.default_content_setting_values.midi_sysex": 2,
     "profile.default_content_setting_values.push_messaging": 2,
+    "profile.default_content_setting_values.durable_storage": 2,
+    "profile.default_content_setting_values.media_stream": 2,
+    "profile.default_content_setting_values.media_stream_mic": 2,
+    "profile.default_content_setting_values.media_stream_camera": 2,
+    "profile.default_content_setting_values.protocol_handlers": 2,
+    "profile.default_content_setting_values.ppapi_broker": 2,
+    "profile.default_content_setting_values.automatic_downloads": 1,
+    "profile.default_content_setting_values.midi_sysex": 2,
+    "profile.default_content_setting_values.push_messaging": 2,
+    "profile.default_content_setting_values.durable_storage": 2,
+    "profile.default_content_setting_values.notifications": 2,
+    "profile.default_content_setting_values.geolocation": 2,
+    "profile.default_content_setting_values.camera": 2,
+    "profile.default_content_setting_values.microphone": 2,
+    "profile.default_content_setting_values.clipboard": 2,
+    "profile.default_content_setting_values.mixed_script": 1,
+    "profile.default_content_setting_values.media_stream_mic": 2,
+    "profile.default_content_setting_values.media_stream_camera": 2,
+    "profile.default_content_setting_values.protocol_handlers": 2,
+    "profile.default_content_setting_values.ppapi_broker": 2,
+    "profile.default_content_setting_values.automatic_downloads": 1,
+    "profile.default_content_setting_values.midi_sysex": 2,
+    "profile.default_content_setting_values.push_messaging": 2,
     "profile.default_content_setting_values.durable_storage": 2
 }
 
@@ -165,8 +207,10 @@ options.add_experimental_option("excludeSwitches", ["enable-automation", "enable
 options.add_experimental_option('useAutomationExtension', False)
 options.add_experimental_option("prefs", advanced_prefs)
 
+# === إنشاء المتصفح ===
 driver = uc.Chrome(options=options, use_subprocess=True)
 
+# === إعدادات CDP ===
 driver.execute_cdp_cmd('Emulation.setTimezoneOverride', {'timezoneId': timezone})
 driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {
     'Accept-Language': language,
@@ -174,13 +218,16 @@ driver.execute_cdp_cmd('Network.setExtraHTTPHeaders', {'headers': {
     'Sec-CH-UA-Mobile': '?0', 'Sec-CH-UA-Platform': f'"{persona["platform"]}"',
     'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Sec-Fetch-User': '?1',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    'Accept-Encoding': 'gzip, deflate, br', 'Cache-Control': 'max-age=0'
+    'Accept-Encoding': 'gzip, deflate, br', 'Cache-Control': 'max-age=0',
+    'Sec-Fetch-Site': 'none', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-User': '?1',
+    'Sec-Fetch-Dest': 'document', 'Upgrade-Insecure-Requests': '1'
 }})
 
 driver.execute_cdp_cmd('Network.setUserAgentOverride', {
     'userAgent': ua, 'acceptLanguage': language, 'platform': persona['platform']
 })
 
+# === محاكاة الشبكة ===
 driver.execute_cdp_cmd('Network.emulateNetworkConditions', {
     'offline': False, 'latency': connection_rtt, 
     'downloadThroughput': int(connection_downlink * 1000000),
@@ -188,7 +235,9 @@ driver.execute_cdp_cmd('Network.emulateNetworkConditions', {
     'packetLoss': random.uniform(network_config["packet_loss"][0], network_config["packet_loss"][1])
 })
 
+# === أقوى سكريبت تمويه في العالم ===
 ultimate_stealth_script = f"""
+// === WebGL التمويه الأقوى ===
 const getParam = WebGLRenderingContext.prototype.getParameter;
 const getExt = WebGLRenderingContext.prototype.getExtension;
 const getSuppExt = WebGLRenderingContext.prototype.getSupportedExtensions;
@@ -199,7 +248,8 @@ WebGLRenderingContext.prototype.getParameter = function(p) {{
         34024: 32, 34930: 32, 35071: 64, 36347: 4096, 36348: 4096, 36349: 1024,
         3386: new Int32Array([1, 1024]), 33902: new Float32Array([1.0, 1024.0]),
         35660: 32, 35661: 32, 36063: 16384, 37446: '{gpu_renderer}',
-        37445: '{gpu_vendor}', 37447: 4096, 37448: 4096, 37449: 1024
+        37445: '{gpu_vendor}', 37447: 4096, 37448: 4096, 37449: 1024,
+        37450: 16384, 37451: 16384, 37452: 16384, 37453: 16384
     }};
     return fakeParams[p] || getParam.apply(this, arguments);
 }};
@@ -209,15 +259,18 @@ WebGLRenderingContext.prototype.getExtension = function(name) {{
                     'WEBKIT_EXT_texture_filter_anisotropic', 'MOZ_EXT_texture_filter_anisotropic', 
                     'WEBGL_compressed_texture_s3tc', 'WEBGL_depth_texture', 'OES_element_index_uint', 
                     'OES_standard_derivatives', 'OES_vertex_array_object', 'WEBGL_lose_context',
-                    'EXT_color_buffer_half_float', 'WEBGL_color_buffer_float', 'WEBGL_compressed_texture_etc'];
+                    'EXT_color_buffer_half_float', 'WEBGL_color_buffer_float', 'WEBGL_compressed_texture_etc',
+                    'WEBGL_compressed_texture_etc1', 'WEBGL_compressed_texture_pvrtc'];
     return allowed.includes(name) ? getExt.apply(this, arguments) : null;
 }};
 
 WebGLRenderingContext.prototype.getSupportedExtensions = function() {{
     return ['WEBGL_debug_renderer_info', 'EXT_texture_filter_anisotropic', 
-            'WEBGL_compressed_texture_s3tc', 'EXT_color_buffer_half_float'];
+            'WEBGL_compressed_texture_s3tc', 'EXT_color_buffer_half_float',
+            'WEBGL_compressed_texture_etc', 'WEBGL_compressed_texture_etc1'];
 }};
 
+// === Canvas التمويه المتطور ===
 const origToDataURL = HTMLCanvasElement.prototype.toDataURL;
 const origGetImageData = CanvasRenderingContext2D.prototype.getImageData;
 
@@ -248,6 +301,7 @@ CanvasRenderingContext2D.prototype.getImageData = function() {{
     return addAdvancedNoise(origGetImageData.apply(this, arguments));
 }};
 
+// === Navigator التمويه الشامل ===
 const descriptors = {{
     webdriver: {{get: () => undefined}}, platform: {{get: () => '{persona["platform"]}'}},
     hardwareConcurrency: {{get: () => {cores}}}, deviceMemory: {{get: () => {memory}}},
@@ -255,10 +309,13 @@ const descriptors = {{
     cookieEnabled: {{get: () => true}}, doNotTrack: {{get: () => null}},
     onLine: {{get: () => true}}, userAgent: {{get: () => '{ua}'}},
     vendor: {{get: () => 'Google Inc.'}}, product: {{get: () => 'Gecko'}},
-    productSub: {{get: () => '20030107'}}, vendorSub: {{get: () => ''}}
+    productSub: {{get: () => '20030107'}}, vendorSub: {{get: () => ''}},
+    appName: {{get: () => 'Netscape'}}, appVersion: {{get: () => '{ua}'}},
+    appCodeName: {{get: () => 'Mozilla'}}, buildID: {{get: () => '20231201000000'}}
 }};
 Object.keys(descriptors).forEach(key => Object.defineProperty(navigator, key, descriptors[key]));
 
+// === WebRTC التمويه الأقوى ===
 if (navigator.mediaDevices) {{
     const origGetUserMedia = navigator.mediaDevices.getUserMedia;
     navigator.mediaDevices.getUserMedia = function(constraints) {{
@@ -269,8 +326,14 @@ if (navigator.mediaDevices) {{
     navigator.mediaDevices.enumerateDevices = function() {{
         return Promise.resolve([]);
     }};
+    
+    const origGetDisplayMedia = navigator.mediaDevices.getDisplayMedia;
+    navigator.mediaDevices.getDisplayMedia = function(constraints) {{
+        return Promise.reject(new DOMException('Permission denied', 'NotAllowedError'));
+    }};
 }}
 
+// === Geolocation التمويه المتقدم ===
 if (navigator.geolocation) {{
     const origGetCurrentPosition = navigator.geolocation.getCurrentPosition;
     navigator.geolocation.getCurrentPosition = function(success, error, options) {{
@@ -285,8 +348,19 @@ if (navigator.geolocation) {{
         }};
         success(fakePosition);
     }};
+    
+    const origWatchPosition = navigator.geolocation.watchPosition;
+    navigator.geolocation.watchPosition = function(success, error, options) {{
+        return 1;
+    }};
+    
+    const origClearWatch = navigator.geolocation.clearWatch;
+    navigator.geolocation.clearWatch = function(watchId) {{
+        return;
+    }};
 }}
 
+// === Audio Context التمويه القوي ===
 ['AudioContext', 'webkitAudioContext'].forEach(name => {{
     if (window[name]) {{
         const origCreateAnalyser = window[name].prototype.createAnalyser;
@@ -317,6 +391,7 @@ if (navigator.geolocation) {{
     }}
 }});
 
+// === إزالة متغيرات الأتمتة الشاملة ===
 const automationVars = ['cdc_adoQpoasnfa76pfcZLmcfl_Array', 'cdc_adoQpoasnfa76pfcZLmcfl_Promise', 
                        'cdc_adoQpoasnfa76pfcZLmcfl_Symbol', 'cdc_adoQpoasnfa76pfcZLmcfl_JSON',
                        'cdc_adoQpoasnfa76pfcZLmcfl_Object', 'cdc_adoQpoasnfa76pfcZLmcfl_Proxy'];
@@ -326,6 +401,7 @@ Object.keys(window).forEach(key => {{
     if (key.includes('cdc_') || key.includes('automation') || key.includes('webdriver')) delete window[key];
 }});
 
+// === Screen التمويه الدقيق ===
 const screenProps = {{
     width: {{get: () => {width}}}, height: {{get: () => {height}}},
     availWidth: {{get: () => {width}}}, availHeight: {{get: () => {height - random.randint(40, 80)}}},
@@ -336,11 +412,14 @@ const screenProps = {{
 }};
 Object.keys(screenProps).forEach(key => Object.defineProperty(screen, key, screenProps[key]));
 
+// === Font Fingerprinting التمويه المتقدم ===
 const fontMetrics = {{
     'Arial': {{ width: 8.5, height: 12 }},
     'Times New Roman': {{ width: 8.2, height: 11.8 }},
     'Helvetica': {{ width: 8.3, height: 11.9 }},
-    'Verdana': {{ width: 8.8, height: 12.2 }}
+    'Verdana': {{ width: 8.8, height: 12.2 }},
+    'Georgia': {{ width: 8.4, height: 12.1 }},
+    'Courier New': {{ width: 8.0, height: 11.5 }}
 }};
 
 const origOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth');
@@ -364,6 +443,7 @@ Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {{
     }}
 }});
 
+// === Performance API التمويه المتقدم ===
 if (window.performance?.now) {{
     const origNow = window.performance.now;
     const timeOffset = Math.random() * 2000;
@@ -381,6 +461,7 @@ if (window.performance?.getEntries) {{
     }};
 }}
 
+// === Battery API التمويه المتقدم ===
 if (navigator.getBattery) {{
     const origGetBattery = navigator.getBattery;
     navigator.getBattery = function() {{
@@ -396,6 +477,7 @@ if (navigator.getBattery) {{
     }};
 }}
 
+// === Connection API التمويه المتقدم ===
 if (navigator.connection) {{
     Object.defineProperties(navigator.connection, {{
         rtt: {{get: () => {connection_rtt}}}, 
@@ -406,6 +488,7 @@ if (navigator.connection) {{
     }});
 }}
 
+// === Date وTimezone التمويه المتقدم ===
 const origGetTimezoneOffset = Date.prototype.getTimezoneOffset;
 Date.prototype.getTimezoneOffset = function() {{ 
     const timezoneOffsets = {{
@@ -423,14 +506,17 @@ if (window.Intl?.DateTimeFormat) {{
     }};
 }}
 
+// === إخفاء iframe وWindow properties ===
 Object.defineProperties(window, {{
     top: {{get: () => window}}, parent: {{get: () => window}}, frameElement: {{get: () => null}}
 }});
 
+// === Chrome Runtime إخفاء ===
 if (window.chrome?.runtime) {{
     ['onConnect', 'onMessage', 'sendMessage'].forEach(prop => delete window.chrome.runtime[prop]);
 }}
 
+// === Mouse Events محاكاة متقدمة ===
 let mouseX = Math.random() * {width}, mouseY = Math.random() * {height};
 let lastMouseTime = Date.now();
 
@@ -454,6 +540,7 @@ setInterval(() => {{
     lastMouseTime = now;
 }}, Math.random() * 3000 + 1000);
 
+// === Permissions API تمويه متقدم ===
 if (navigator.permissions?.query) {{
     const origQuery = navigator.permissions.query;
     navigator.permissions.query = function(obj) {{
@@ -462,55 +549,157 @@ if (navigator.permissions?.query) {{
             if (obj.name === 'geolocation') result.state = 'denied';
             if (obj.name === 'camera') result.state = 'denied';
             if (obj.name === 'microphone') result.state = 'denied';
+            if (obj.name === 'persistent-storage') result.state = 'denied';
+            if (obj.name === 'background-sync') result.state = 'denied';
             return result;
         }});
     }};
 }}
 
+// === Hardware Concurrency تمويه متقدم ===
 Object.defineProperty(navigator, 'hardwareConcurrency', {{
     get: () => {cores}
 }});
 
+// === Device Memory تمويه متقدم ===
 Object.defineProperty(navigator, 'deviceMemory', {{
     get: () => {memory}
 }});
 
+// === Max Touch Points تمويه ===
 Object.defineProperty(navigator, 'maxTouchPoints', {{
     get: () => 0
 }});
 
+// === إزالة WebDriver ===
 delete navigator.__proto__.webdriver;
 
+// === إخفاء Automation ===
 Object.defineProperty(navigator, 'webdriver', {{
     get: () => undefined
 }});
 
+// === إخفاء Chrome ===
 if (window.chrome) {{
     Object.defineProperty(window.chrome, 'runtime', {{
         get: () => undefined
     }});
 }}
 
+// === إخفاء Selenium ===
 Object.defineProperty(window, 'selenium', {{
     get: () => undefined
 }});
 
+// === إخفاء WebDriver ===
 Object.defineProperty(window, 'webdriver', {{
     get: () => undefined
 }});
 
+// === إخفاء $cdc ===
 Object.keys(window).forEach(key => {{
     if (key.includes('$cdc') || key.includes('$chrome')) {{
         delete window[key];
     }}
 }});
+
+// === إخفاء Automation Variables ===
+Object.keys(window).forEach(key => {{
+    if (key.includes('automation') || key.includes('selenium') || key.includes('webdriver')) {{
+        delete window[key];
+    }}
+}});
+
+// === إخفاء Chrome Extensions ===
+if (window.chrome?.loadTimes) {{
+    delete window.chrome.loadTimes;
+}}
+
+if (window.chrome?.csi) {{
+    delete window.chrome.csi;
+}}
+
+if (window.chrome?.app) {{
+    delete window.chrome.app;
+}}
+
+// === إخفاء Automation Flags ===
+Object.defineProperty(navigator, 'webdriver', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+Object.defineProperty(navigator, '__webdriver_evaluate', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+Object.defineProperty(navigator, '__selenium_evaluate', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+Object.defineProperty(navigator, '__webdriver_script_fn', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+Object.defineProperty(navigator, '__webdriver_script_func', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+Object.defineProperty(navigator, '__webdriver_script_func_args', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+Object.defineProperty(navigator, '__webdriver_script_func_result', {{
+    get: () => undefined,
+    configurable: true
+}});
+
+// === إخفاء Chrome Runtime ===
+if (window.chrome?.runtime?.onConnect) {{
+    delete window.chrome.runtime.onConnect;
+}}
+
+if (window.chrome?.runtime?.onMessage) {{
+    delete window.chrome.runtime.onMessage;
+}}
+
+if (window.chrome?.runtime?.sendMessage) {{
+    delete window.chrome.runtime.sendMessage;
+}}
+
+// === إخفاء Automation Properties ===
+Object.defineProperty(window, 'chrome', {{
+    get: () => {{
+        return {{
+            runtime: {{
+                onConnect: undefined,
+                onMessage: undefined,
+                sendMessage: undefined
+            }},
+            loadTimes: undefined,
+            csi: undefined,
+            app: undefined
+        }};
+    }},
+    configurable: true
+}});
+
+console.log('🚀 Ultimate Stealth Script Loaded Successfully!');
 """
 
+# === حقن السكريبت الفائق ===
 driver.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {'source': ultimate_stealth_script})
 
+# === التنقل ===
 driver.get("https://bot.sannysoft.com/")
 time.sleep(random.uniform(4, 8))
 
+# === التفاعل البشري ===
 for i in range(random.randint(3, 6)):
     scroll_amount = random.randint(150, 400)
     driver.execute_script(f"window.scrollBy(0, {scroll_amount});")
